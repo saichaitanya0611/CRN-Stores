@@ -1,0 +1,66 @@
+
+<header class="shadow">
+    <div class="logo col-2">
+      <input type="text"  [(ngModel)]="searchTerm" (keyup)="search($event)"placeholder="Search Products"><span> <i class="fas fa-search" id="search" (click)="iconFunction()"></i></span>      
+    </div>
+    <div class="col-9 pt-4">
+
+    <ul>
+        <li>
+        <button  class="bg-color" (click)="filter('')">All Products</button>
+        </li>
+    <li>
+        <button class="bg-color" (click)="filter('electronics')">Electronics</button>
+
+    </li>
+    <li>
+        <button class="bg-color"  (click)="filter('mens clothing')">Mens's Clothing</button>
+
+    </li>
+    <li>
+        <button class="bg-color" (click)="filter('womens clothing')">Womens's Clothing</button>
+
+    </li>
+    <li>
+        <button class="bg-color" (click)="filter('books')">Books</button>
+
+    </li>
+    <li>
+        <button class="bg-color" (click)="filter('accessories')">Accessories</button>
+    
+    </li>
+       
+    </ul>
+</div>
+</header>
+
+<div class="ctn wears">
+    <div class="rw">
+        <ng-container *ngFor="let item of filterCategory | filter:searchKey:'title' " class="r">
+            <div class="card bg-light">
+                <img src="{{item.image}}" alt="">
+                <h5><a (click)="addTopd(item)">{{item.title}}</a></h5>
+                <p>{{item.description}}</p>
+                <h6>
+                    <button (click)="addTopd(item)" class="btn btn-primary bg-color">View details</button>
+                </h6>
+                <h6><Strong>Price:</Strong> ${{item.price}}</h6>
+                <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn" (click)="addToCart(item)">Add To Cart</button>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">CRN Stores</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p>Added To Cart</p>
+        </div>
+      </div>
+    </div>
+  </div>

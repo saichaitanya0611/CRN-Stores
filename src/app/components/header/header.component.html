@@ -1,0 +1,49 @@
+<nav class="navbar navbar-dark bg-dark">
+  <!-- Navbar content -->
+  <a class="navbar-brand pl-2" href="#">
+    <!-- <img src="" width="30" height="30" class="d-inline-block align-top" alt=""> -->
+    CRN Stores
+  </a>
+
+  <form *ngIf="!apiService.firstName" class="form-inline">
+    <a routerLink="login"><button class="btn btn-outline-success" type="button">Login</button></a>
+    <a routerLink="register"><button class="btn btn-outline-success" type="button">Sign Up</button></a>
+  </form>
+
+  <div *ngIf="!!apiService.firstName">
+    <span class="navbar-text text-success">
+      Hello {{apiService.firstName}}
+    </span>
+    <button class="btn btn-outline-success" (click)="logout()">Logout
+    </button>
+  </div>
+
+  <div class="icn">
+    <a routerLink="cart">
+       <button class="btn btn-outline-success">
+           <i class="fa fa-cart-plus" style="color: #ffffff;font-size: 30px;" ></i>
+           <div style="font-size: 10px;" class="badge bg-danger bbd">{{totalItem}}</div>
+         </button>
+    </a>
+   </div>
+</nav>
+
+
+<!-- <header class="shadow">
+    <div class="logo">
+      <input type="text"  [(ngModel)]="searchTerm" (keyup)="search($event)"placeholder="Search Products"><span> <i class="fas fa-search" id="search" (click)="iconFunction()"></i></span>
+      <div class="Mq" *ngIf="icon">
+          <h5 class="badge" (click)="modalFunction()">X</h5>
+        <input class="mq" type="text"  [(ngModel)]="searchTerm" (keyup)="search($event)"placeholder="Search Products">
+      </div>
+      
+    </div>
+    <div class="icn">
+     <a routerLink="cart">
+        <button class="btn shadow-sm">
+            <i class="fas fa-cart-plus ifcp " style="font-size: 30px;"></i>
+            <div style="font-size: 10px;" class="badge bg-danger bbd">{{totalItem}}</div>
+          </button>
+     </a>
+    </div>
+  </header> -->

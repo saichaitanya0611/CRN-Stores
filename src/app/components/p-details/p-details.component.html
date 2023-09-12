@@ -1,0 +1,39 @@
+
+<div class="container">
+    <a routerLink="/products" class="btn btn-primary">Go back</a>
+    <div class="product-list">
+        <div *ngFor="let item of product" class="product-item">
+            <img src="{{item.image}}" alt="" class="product-image">
+        </div>
+        <div *ngFor="let item of product" class="product-description">
+            <h5 class="product-title">{{item.title}}</h5>
+            <p class="product-info">{{item.description}}</p>
+            <h6><strong>Price:</strong> {{item.price}}</h6>
+            
+            <star-rating [value]="item.rating.rate" [totalstars]="5" [checkedcolor]="'orange'" uncheckedcolor="black" size="24px" [readonly]="true"></star-rating> 
+            <span>Rating Count: {{item.rating.count}}</span>
+            <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-success" (click)="addToCart(item)">Add To Cart</button>
+            
+            <h6><strong>Reviews</strong></h6>
+            <ul>
+                <li *ngFor="let review of item.reviews">
+                    {{review}}
+                </li>
+            </ul>
+
+
+            <div class="form-group">
+                <label for="username">Write Review</label>
+                <input type="text" [formControl]="reviewForm" class="form-control" />
+                <div *ngIf="submitted && reviewForm!.errors" class="invalid-feedback">
+                    <div *ngIf="reviewForm!.errors.required">Review is required</div>
+                </div>
+                <button class="btn btn-success" (click)="addReview()">Add Review</button>
+
+            </div>
+            
+        
+            
+        </div>
+    </div>
+</div>

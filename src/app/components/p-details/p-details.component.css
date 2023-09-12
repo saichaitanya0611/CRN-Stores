@@ -1,0 +1,125 @@
+.bdy{
+    margin: 3rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+img{
+    width: 40%;
+}
+a{
+    margin:1rem .7rem;
+    color: white;
+    background-color: #04570c;
+    font-size: 1rem;
+    border-radius: 5px;
+    padding: .7rem;
+    text-decoration: none;
+}
+.btn{
+    background-color:#04570c;
+    width: 100%;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 1rem 0;
+}
+h5, p{
+    margin: 1rem 0;
+}
+
+/* -----------RESPONSIVEMESS-------------- */
+@media only screen  and (max-width:1024px) and (min-width:80px){
+    .bdy{
+        flex-direction: column;
+
+    }
+}
+
+
+.container {
+    margin-top: 20px;
+}
+
+.product-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-item {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.product-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.product-description {
+    flex: 2;
+}
+
+.product-title {
+    font-size: 1.5rem;
+    margin-top: 0;
+}
+
+.product-info {
+    margin-bottom: 10px;
+}
+
+.btn {
+    margin-top: 10px;
+}
+
+
+.product-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 16px;
+    text-align: center;
+    width: 100%; /* Occupy full width */
+    height: 100vh; /* Occupy full viewport height */
+    justify-content: center; /* Center content vertically */
+    box-sizing: border-box; /* Include padding within the width/height */
+  }
+  
+  .product-image {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .product-title {
+    font-size: 1.2rem;
+    margin: 8px 0;
+  }
+  
+  .product-description {
+    font-size: 1rem;
+    margin: 8px 0;
+  }
+  
+  .product-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 8px 0;
+  }
+  
+  .add-to-cart-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 8px;
+  }
+  
+  .add-to-cart-button:hover {
+    background-color: #0056b3;
+  }
+  

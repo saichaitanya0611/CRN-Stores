@@ -1,0 +1,91 @@
+import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/services/api.service';
+import { CartService } from 'src/app/services/cart.service';
+import { Router } from '@angular/router';
+@Component({
+  selector: 'app-product',
+  templateUrl: './product.component.html',
+  styleUrls: ['./product.component.css']
+})
+export class ProductComponent implements OnInit {
+
+public productList : any ;
+public productLis : any ;
+public filterCategory:  any;
+public searchTerm: string = "";
+
+
+searchKey:string =""
+icon:boolean=false;
+   modal:boolean=true;
+   
+
+// Imjecting cart service
+  constructor(private api: ApiService, private cartService : CartService,private router: Router) { }
+
+  //function to add to cart and filtering products on initialization
+  ngOnInit(): void {
+    this.api.getProduct()
+    .subscribe(res=>{
+      this.productList = res ;
+      this.filterCategory = res
+      this.productList.forEach((a:any) => {
+        if(a.category === "women's clothing" || a.category === "men's clothing" ){
+          a.category = "fashion"
+        }
+        Object.assign(a,{quantity:1,total:a.price})
+      });
+      console.log(this.productList)
+    })
+    this.api.getProduct()
+    .subscribe(res=>{
+      this.productLis = res ;
+      
+    })
+    this.cartService.search.subscribe(val=>{
+      this.searchKey = val
+    })
+  }
+
+  iconFunction(){
+    this.icon=true;
+    this.modal=false;
+   
+}
+
+modalFunction(){
+    this.modal=true;
+    this.icon=false;
+   
+}
+
+  search(event:any){
+    this.searchTerm = (event.target as HTMLInputElement).value;
+    console.log(this.searchTerm)
+    // this.cartService.search.next(this.searchTerm)
+    this.searchKey = this.searchTerm ;
+  }
+
+  addToCart(item:any){
+    this.cartService.addToCart(item)
+    
+  }
+
+  filter(category:string){
+    this.filterCategory = this.productList
+    .filter((a:any)=>{
+      if(a.category ===  category || category === ""){
+        return a;
+      }
+    })
+  }
+
+  // this is to view product details..
+  addToCar(item:any){
+    this.cartService.addToCar(item)
+  }
+  addTopd(item:any){
+    this.cartService.addToCar(item)
+    this.router.navigate(['pd'])
+  }
+}
