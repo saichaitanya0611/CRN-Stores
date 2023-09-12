@@ -30,7 +30,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [],
+            "scripts": [{"install": "npm install --force"}],
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json"
           },
