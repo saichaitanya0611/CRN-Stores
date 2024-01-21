@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Directive, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
@@ -13,6 +13,11 @@ export class RegistrationComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string = '';
+  capsOn1;
+  capsOn2;
+  focus1;
+  focus2;
+
 
   constructor(
       private formBuilder: FormBuilder,
@@ -29,10 +34,10 @@ export class RegistrationComponent implements OnInit {
           confirmPassword: ['', Validators.required],
           firstName: ['', Validators.required],
           lastName: ['', Validators.required],
-          streetAddress: ['', Validators.required],
-          city: ['', Validators.required],
-          state: ['', Validators.required],
-          zip: ['', Validators.required],
+          streetAddress: [''],
+          city: [''],
+          state: [''],
+          zip: [''],
           telephone: ['', Validators.required],
           email: ['', Validators.required],
       });
@@ -61,5 +66,49 @@ export class RegistrationComponent implements OnInit {
     }
       
   }
+  autocompleteFocus() {
+    this.focus1 = true;
+  }
+
+  autocompleteBlur() {    
+    this.focus1 = false;
+  }
+
+  autocompleteFocus2() {
+    this.focus2 = true;
+  }
+
+  autocompleteBlur2() {    
+    this.focus2 = false;
+  }
+
+}
+
+
+@Directive({ selector: '[capsLock]' })
+export class TrackCapsDirective {
+ 
+  @Output('capsLock') capsLock = new EventEmitter<Boolean>();
+
+  @HostListener('window:keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent): void {
+  //  this.capsLock.emit(event.getModifierState && event.getModifierState('CapsLock'));
+  this.capsLock.emit(this.capS(event))
+  }
+  @HostListener('window:keyup', ['$event'])
+  onKeyUp(event: KeyboardEvent): void {
+     this.capsLock.emit(this.capS(event))
+   // this.capsLock.emit(event.getModifierState && event.getModifierState('CapsLock'));
+  }
+
+  capS(e){
+var s = String.fromCharCode( e.which );
+    if (
+      (s.toUpperCase() === s && s.toLowerCase() !== s && e.shiftKey) || //caps is on
+      (s.toUpperCase() !== s && s.toLowerCase() === s && e.shiftKey) || 
+      e.getModifierState('CapsLock')
+      )  { return true; }  
+    return false;
+}
 
 }

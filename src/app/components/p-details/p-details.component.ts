@@ -12,6 +12,8 @@ export class PDetailsComponent implements OnInit,OnDestroy {
   public grandTotal !: number ;
   reviewForm= new FormControl("");
   submitted: boolean;
+  selectedQuantity =1;
+  showWrite = true;
 
     constructor(private cartService: CartService, private router: Router) { }
   
@@ -23,6 +25,8 @@ export class PDetailsComponent implements OnInit,OnDestroy {
     }
 
     addToCart(item:any){
+      item.quantity = this.selectedQuantity;
+      item.total = item.quantity*item.price;
       this.cartService.addToCart(item)
       this.removeItem(item);{
         this.cartService.removeAllCar()
@@ -42,6 +46,11 @@ export class PDetailsComponent implements OnInit,OnDestroy {
       if(this.reviewForm.value.trim() != '') {
         this.product[0].reviews.push(this.reviewForm.value);
         this.reviewForm.setValue("");
+        this.showWrite = true;
       }
+    }
+
+    showAddReview() {
+      this.showWrite = false;
     }
 }

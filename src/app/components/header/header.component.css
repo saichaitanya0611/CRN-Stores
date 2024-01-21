@@ -1,5 +1,25 @@
 
-button{
+.fixed {
+    position: sticky;
+}
+
+
+button {
     border: none;
     background-color: transparent;
+    color: #D81B60 !important;
 }
+
+.login-icon {
+    display: inline-flex;
+    vertical-align: top;
+  }
+
+  .class4 {
+    color: #D81B60 !important;
+}
+
+.custom {
+    background-color: rgba(7, 7, 7, 0.927) !important;
+}
+

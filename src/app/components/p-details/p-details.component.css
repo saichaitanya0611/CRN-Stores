@@ -10,14 +10,14 @@ img{
 a{
     margin:1rem .7rem;
     color: white;
-    background-color: #04570c;
+    background-color: #D81B60;
     font-size: 1rem;
     border-radius: 5px;
     padding: .7rem;
     text-decoration: none;
 }
 .btn{
-    background-color:#04570c;
+    background-color:#D81B60;
     width: 100%;
     color: white;
     font-weight: 600;
@@ -49,12 +49,12 @@ h5, p{
 
 .product-item {
     flex: 1;
-    margin-right: 20px;
+    margin: 20px;
 }
 
 .product-image {
-    max-width: 100%;
-    height: auto;
+    width: 100%;
+    height: 400px !important;
 }
 
 .product-description {
@@ -123,3 +123,8 @@ h5, p{
     background-color: #0056b3;
   }
   
+
+  .login-icon {
+    display: inline-flex;
+    vertical-align: top;
+  }

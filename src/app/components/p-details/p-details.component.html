@@ -1,6 +1,6 @@
-
+<a routerLink="/products" class="login-icon"><mat-icon>keyboard_arrow_left</mat-icon>Back</a>
 <div class="container">
-    <a routerLink="/products" class="btn btn-primary">Go back</a>
+    
     <div class="product-list">
         <div *ngFor="let item of product" class="product-item">
             <img src="{{item.image}}" alt="" class="product-image">
@@ -8,10 +8,33 @@
         <div *ngFor="let item of product" class="product-description">
             <h5 class="product-title">{{item.title}}</h5>
             <p class="product-info">{{item.description}}</p>
-            <h6><strong>Price:</strong> {{item.price}}</h6>
+            <h6><strong>Price:</strong> {{item.price | currency:'USD':true:'.2-2'}}</h6>
             
-            <star-rating [value]="item.rating.rate" [totalstars]="5" [checkedcolor]="'orange'" uncheckedcolor="black" size="24px" [readonly]="true"></star-rating> 
-            <span>Rating Count: {{item.rating.count}}</span>
+            <!-- <star-rating [value]="item.rating.rate" [totalstars]="5" [checkedcolor]="'orange'" uncheckedcolor="black" size="24px" [readonly]="true"></star-rating>  -->
+            <!-- <span>Rating Count: {{item.rating.count}}</span> -->
+            <div class="row">
+                    
+                <div class=" col-3">
+
+                <star-rating [value]="item.rating.rate" [totalstars]="5" [checkedcolor]="'orange'" uncheckedcolor="black" size="24px" [readonly]="true"></star-rating>
+                    </div>
+                    <div class="col-4 pt-2">
+                        {{item.rating.rate}} ({{item.rating.count}})
+                    </div>
+            </div>
+            <div class="col-1">
+            <label >Quantity: </label>
+                    <select class="form-select" [(ngModel)]="selectedQuantity">
+                        <option [value]="1" selected="selected">1</option>
+                        <option [value]="2">2</option>
+                        <option [value]="3">3</option>
+                        <option [value]="4">4</option>
+                        <option [value]="5">5</option>
+                        <option [value]="6">6</option>
+                        <option [value]="7">7</option>
+
+                    </select>
+                </div>
             <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-success" (click)="addToCart(item)">Add To Cart</button>
             
             <h6><strong>Reviews</strong></h6>
@@ -21,13 +44,14 @@
                 </li>
             </ul>
 
-
-            <div class="form-group">
-                <label for="username">Write Review</label>
+            <button class="btn btn-success" *ngIf="showWrite" (click)="showAddReview()">Write a Review</button>
+            <div *ngIf="!showWrite" class="form-group">
+                <label for="username">Add Review</label>
                 <input type="text" [formControl]="reviewForm" class="form-control" />
                 <div *ngIf="submitted && reviewForm!.errors" class="invalid-feedback">
                     <div *ngIf="reviewForm!.errors.required">Review is required</div>
                 </div>
+                
                 <button class="btn btn-success" (click)="addReview()">Add Review</button>
 
             </div>

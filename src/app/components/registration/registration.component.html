@@ -3,31 +3,41 @@
     <h2>Creat Account</h2>
     <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && registrationForm.get('username')!.errors }" />
+            <label for="username" class="control-label">Username</label>
+            <input placeholder="e.g steveSmith09" type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && registrationForm.get('username')!.errors }" />
             <div *ngIf="submitted && registrationForm.get('username')!.errors" class="invalid-feedback">
                 <div *ngIf="registrationForm.get('username')!.errors.required">Username is required</div>
             </div>
         </div>
         <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && registrationForm.get('password')!.errors }" />
+            <label for="password" class="control-label">Password</label>
+            <input (focus)="autocompleteFocus()" (blur)="autocompleteBlur()" (capsLock)="capsOn1=$event" type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && registrationForm.get('password')!.errors }" />
             <div *ngIf="submitted && registrationForm.get('password')!.errors" class="invalid-feedback">
                 <div *ngIf="registrationForm.get('password')!.errors.required">Password is required</div>
             </div>
+            
         </div>
+        <div class="text-danger">
+            <div *ngIf="capsOn1 && focus1 ">Caps Lock is On</div>
+        </div>  
+        
         <div class="form-group">
-            <label for="password">Confirm Password</label>
-            <input type="password" formControlName="confirmPassword" class="form-control"
+            <label for="password" class="control-label">Confirm Password</label>
+            <input (focus)="autocompleteFocus2()" (blur)="autocompleteBlur2()" (capsLock)="capsOn2=$event" type="password" formControlName="confirmPassword" class="form-control"
              [ngClass]="{ 'is-invalid': submitted && registrationForm.get('confirmPassword')!.errors }" />
             <div *ngIf="submitted && registrationForm.get('confirmPassword')!.errors" class="invalid-feedback">
                 <div *ngIf="registrationForm.get('confirmPassword')!.errors.required">Password is required</div>
             </div>
+            
         </div>
+        <div class="text-danger">
+            <div *ngIf="capsOn2 && focus2">Caps Lock is On</div>
+        </div>
+        
 
         <div class="form-group">
-            <label for="password">First Name</label>
-            <input type="password" formControlName="firstName" class="form-control"
+            <label for="password" class="control-label">First Name</label>
+            <input placeholder="e.g Steve" type="text" formControlName="firstName" class="form-control"
              [ngClass]="{ 'is-invalid': submitted && registrationForm.get('firstName')!.errors }" />
             <div *ngIf="submitted && registrationForm.get('firstName')!.errors" class="invalid-feedback">
                 <div *ngIf="registrationForm.get('firstName')!.errors.required">First Name is required</div>
@@ -35,17 +45,17 @@
         </div>
 
         <div class="form-group">
-            <label for="lastName">Last Name</label>
-            <input type="lastName" formControlName="lastName" class="form-control"
+            <label for="lastName" class="control-label">Last Name</label>
+            <input placeholder="e.g Smith" type="text" formControlName="lastName" class="form-control"
              [ngClass]="{ 'is-invalid': submitted && registrationForm.get('lastName')!.errors }" />
             <div *ngIf="submitted && registrationForm.get('lastName')!.errors" class="invalid-feedback">
                 <div *ngIf="registrationForm.get('lastName')!.errors.required">Last Name is required</div>
             </div>
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="streetAddress">Street Address</label>
-            <input type="text" formControlName="streetAddress" class="form-control"
+            <input  type="text" placeholder="e.g 11111 Church St, Apt J" formControlName="streetAddress" class="form-control"
              [ngClass]="{ 'is-invalid': submitted && registrationForm.get('streetAddress')!.errors }" />
             <div *ngIf="submitted && registrationForm.get('streetAddress')!.errors" class="invalid-feedback">
                 <div *ngIf="registrationForm.get('streetAddress')!.errors.required">Address is required</div>
@@ -54,7 +64,7 @@
 
         <div class="form-group">
             <label for="city">City</label>
-            <input type="text" formControlName="city" class="form-control"
+            <input  placeholder="e.g Fairfax" type="text" formControlName="city" class="form-control"
              [ngClass]="{ 'is-invalid': submitted && registrationForm.get('city')!.errors }" />
             <div *ngIf="submitted && registrationForm.get('city')!.errors" class="invalid-feedback">
                 <div *ngIf="registrationForm.get('city')!.errors.required">City is required</div>
@@ -63,7 +73,7 @@
 
         <div class="form-group">
             <label for="state">State</label>
-            <input type="text" formControlName="state" class="form-control"
+            <input placeholder="e.g VA" type="text" formControlName="state" class="form-control"
              [ngClass]="{ 'is-invalid': submitted && registrationForm.get('state')!.errors }" />
             <div *ngIf="submitted && registrationForm.get('state')!.errors" class="invalid-feedback">
                 <div *ngIf="registrationForm.get('state')!.errors.required">State is required</div>
@@ -72,16 +82,16 @@
 
         <div class="form-group">
             <label for="zip">Zip Code</label>
-            <input type="text" formControlName="zip" class="form-control"
+            <input placeholder="e.g 22030" type="text" formControlName="zip" class="form-control"
              [ngClass]="{ 'is-invalid': submitted && registrationForm.get('zip')!.errors }" />
             <div *ngIf="submitted && registrationForm.get('zip')!.errors" class="invalid-feedback">
                 <div *ngIf="registrationForm.get('zip')!.errors.required">Zip Code is required</div>
             </div>
-        </div>
+        </div> -->
 
         <div class="form-group">
-            <label for="telephone">Phone Number</label>
-            <input type="text" formControlName="telephone" class="form-control"
+            <label for="telephone" class="control-label">Phone Number</label>
+            <input placeholder="e.g +1 xxxxxxxxxx" type="text" formControlName="telephone" class="form-control"
              [ngClass]="{ 'is-invalid': submitted && registrationForm.get('telephone')!.errors }" />
             <div *ngIf="submitted && registrationForm.get('telephone')!.errors" class="invalid-feedback">
                 <div *ngIf="registrationForm.get('telephone')!.errors.required">Phone Number is required</div>
@@ -89,8 +99,8 @@
         </div>
 
         <div class="form-group">
-            <label for="email">Email</label>
-            <input type="text" formControlName="email" class="form-control"
+            <label for="email" class="control-label">Email</label>
+            <input placeholder="e.g steve@example.com" type="text" formControlName="email" class="form-control"
              [ngClass]="{ 'is-invalid': submitted && registrationForm.get('email')!.errors }" />
             <div *ngIf="submitted && registrationForm.get('email')!.errors" class="invalid-feedback">
                 <div *ngIf="registrationForm.get('email')!.errors.required">Email is required</div>

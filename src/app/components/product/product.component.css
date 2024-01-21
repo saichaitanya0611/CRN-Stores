@@ -82,7 +82,7 @@ li img{
 h6{
     font-size: .8rem;
     margin-top: .6rem;
-    color: #04570c;
+    color: #D81B60;
 }
 .wears{
     margin-top: 5rem;
@@ -94,7 +94,7 @@ h5, p{
     text-overflow: ellipsis;
     max-width: 100ch;
     font-weight: 600;
-    background: #04570c;
+    background: #D81B60;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -112,7 +112,7 @@ h5, p{
 }
 
 button{
-    background-color: #04570c;
+    background-color: #D81B60;
     color: white;
     border-radius: 1rem;
 }
@@ -125,8 +125,13 @@ button{
     background-color: #050505;
 }
 
+.blue {
+    background-color: #1507e068 !important;
+
+}
+
 i{
-    color:#04570c;
+    color:#D81B60;
 }
 a{
     cursor: pointer;
@@ -139,7 +144,7 @@ header{
     padding: .7rem 1rem;
     border-top: none;
     justify-content: space-between;
-    color: #04570c;
+    color: #D81B60;
     border-radius: .5rem;
     background-color: white;
     top: 0;
@@ -150,7 +155,7 @@ header{
     display: flex;
 }
 .logo i{
-    color: #04570c;;
+    color: #D81B60;;
     font-size: 3rem;
     margin: 0 10px;
 }
@@ -194,3 +199,67 @@ li {
   display: inline-block;
   margin-right: 10px; /* add spacing between items */
 }
+.filter-dropdown {
+    padding: 5px;
+    margin-left: 10px;
+}
+
+.full{
+    background-color:#D81B60;
+    width: 100%;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 1rem 0;
+    padding: 10px;
+}
+
+.class1 {
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 0px !important;
+
+
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.class2 {
+    padding-right: 0px !important;
+}
+.full-cart {
+    width: 100%;
+}
+
+.class3 {
+    font-size: medium;
+}
+
+.class4 {
+    background-color: black !important;
+    margin-bottom: 0px !important;
+    padding-top: 20px !important;
+
+}
+
+.class6 {
+    margin-top: 0px !important;
+    
+
+}
+
+  
+  .zoom:hover {
+    transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }
+
+
+.login-icon {
+    display: inline-flex;
+    vertical-align: top;
+  } 
+
+  .class5:hover {
+    background-color: rgb(224, 141, 216) !important; /* New text color when hovered */
+  }

@@ -1,22 +1,23 @@
-<nav class="navbar navbar-dark bg-dark">
+<nav class="navbar navbar-dark bg-secondary custom fixed">
   <!-- Navbar content -->
-  <a class="navbar-brand pl-2" href="#">
+  <a class="navbar-brand pl-2" routerLink="products">
     <!-- <img src="" width="30" height="30" class="d-inline-block align-top" alt=""> -->
     CRN Stores
   </a>
-
+  <div class="ms-auto">
   <form *ngIf="!apiService.firstName" class="form-inline">
-    <a routerLink="login"><button class="btn btn-outline-success" type="button">Login</button></a>
-    <a routerLink="register"><button class="btn btn-outline-success" type="button">Sign Up</button></a>
+    <a routerLink="login"><button class="btn btn-outline-success" type="button"><mat-icon class="login-icon">login</mat-icon>Login</button></a>
+    <a routerLink="register"><button class="btn btn-outline-success" type="button"><mat-icon class="login-icon">person</mat-icon>Sign Up</button></a>
   </form>
 
   <div *ngIf="!!apiService.firstName">
-    <span class="navbar-text text-success">
+    <span class="navbar-text class4">
       Hello {{apiService.firstName}}
     </span>
-    <button class="btn btn-outline-success" (click)="logout()">Logout
+    <button class="btn btn-outline-success" (click)="logout()"><mat-icon class="login-icon">logout</mat-icon>Logout
     </button>
   </div>
+ </div>
 
   <div class="icn">
     <a routerLink="cart">

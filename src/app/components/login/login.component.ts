@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
   returnUrl: string = '';
   showError: boolean;
   error: string;
+  capsOn;
+  focus;
 
   constructor(
       private formBuilder: FormBuilder,
@@ -23,6 +25,15 @@ export class LoginComponent implements OnInit {
       private router: Router,
       private apiService: ApiService
   ) {
+  }
+
+
+  autocompleteFocus() {
+    this.focus = true;
+  }
+
+  autocompleteBlur() {    
+    this.focus = false;
   }
 
   ngOnInit() {

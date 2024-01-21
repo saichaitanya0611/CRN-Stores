@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
@@ -8,11 +8,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-
+  @ViewChild('modal') content: any;
 public productList : any ;
 public productLis : any ;
 public filterCategory:  any;
 public searchTerm: string = "";
+public category:string = "";
+public selectedQuantities: number[] = [];
+public quantities = [1, 2, 3, 4, 5];
 
 
 searchKey:string =""
@@ -21,7 +24,7 @@ icon:boolean=false;
    
 
 // Imjecting cart service
-  constructor(private api: ApiService, private cartService : CartService,private router: Router) { }
+  constructor(private api: ApiService, private cartService : CartService,private router: Router, private ref: ChangeDetectorRef) { }
 
   //function to add to cart and filtering products on initialization
   ngOnInit(): void {
@@ -66,18 +69,66 @@ modalFunction(){
     this.searchKey = this.searchTerm ;
   }
 
-  addToCart(item:any){
-    this.cartService.addToCart(item)
+  addToCart(item:any, i:any){
+    item.quantity = !!this.selectedQuantities[i]? this.selectedQuantities[i] : 1;
+    item.total = item.quantity*item.price;
+
+    this.cartService.addToCart(item);
+    setTimeout(()=>{this.content.nativeElement.click()}, 800);
     
   }
 
-  filter(category:string){
+  filter(event:any){
+    this.category = event.target.value;
     this.filterCategory = this.productList
     .filter((a:any)=>{
-      if(a.category ===  category || category === ""){
+      if(a.category ===  this.category || this.category === ""){
         return a;
       }
     })
+  }
+
+  sort(event:any){
+    let value = event.target.value;
+    if(value=="") {
+      this.filterCategory = this.productLis
+      .filter((a:any)=>{
+        if(a.category ===  this.category || this.category === ""){
+          return a;
+        }
+      })
+      console.log(this.filterCategory);
+    } else if(value=="pricelh"){
+      this.filterCategory  = this.filterCategory.sort((a, b) => a.price - b.price);
+      this.filterCategory = this.filterCategory
+      .filter((a:any)=>{
+        if(a.category ===  this.category || this.category === ""){
+          return a;
+        }
+      })
+      console.log(this.filterCategory);
+
+    } else if(value=="pricehl"){
+      this.filterCategory  = this.filterCategory.sort((a, b) => b.price - a.price);
+      this.filterCategory = this.filterCategory
+      .filter((a:any)=>{
+        if(a.category ===  this.category || this.category === ""){
+          return a;
+        }
+      })
+      
+    } else if(value=="rating"){
+      this.filterCategory  = this.filterCategory.sort((a, b) => b.rating.rate - a.rating.rate);
+      this.filterCategory = this.filterCategory
+      .filter((a:any)=>{
+        if(a.category ===  this.category || this.category === ""){
+          return a;
+        }
+      })
+      
+    } 
+    this.ref.detectChanges();
+
   }
 
   // this is to view product details..
@@ -88,4 +139,10 @@ modalFunction(){
     this.cartService.addToCar(item)
     this.router.navigate(['pd'])
   }
+
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+
 }

@@ -37,7 +37,7 @@ export class CartService {
   getTotalPrice() : number{
     let grandTotal = 0;
     this.cartItemList.map((a:any)=>{
-      grandTotal+= a.total
+      grandTotal+= a.total;
     })
     return grandTotal
   }
@@ -48,6 +48,13 @@ export class CartService {
         this.cartItemList.splice(index,1)
       }
     })
+    this.productList.next(this.cartItemList)
+  }
+
+  removeCartItemSelected(list:any[]){
+    list.sort(function(a,b){ return b - a; });
+    list.forEach((a) => {this.cartItemList.splice(a,1)})
+    
     this.productList.next(this.cartItemList)
   }
 

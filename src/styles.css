@@ -3,7 +3,7 @@ body{
     background-color: rgb(252, 248, 248);
 }
 .ob{
-    color: #04570c;
+    color: #D81B60;
 }
 #loader {
     bottom: 0;
@@ -150,3 +150,5 @@ body{
   .spinner-message {
     text-align: center;
   }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

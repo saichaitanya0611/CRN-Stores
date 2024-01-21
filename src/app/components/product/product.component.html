@@ -1,54 +1,129 @@
 
 <header class="shadow">
-    <div class="logo col-2">
+    <div class="logo col-2 offset-2">
       <input type="text"  [(ngModel)]="searchTerm" (keyup)="search($event)"placeholder="Search Products"><span> <i class="fas fa-search" id="search" (click)="iconFunction()"></i></span>      
     </div>
-    <div class="col-9 pt-4">
+    <div class="col-3 pt-4">
 
-    <ul>
+    <!-- <ul>
         <li>
-        <button  class="bg-color" (click)="filter('')">All Products</button>
+        <button  class="bg-color"  [ngClass]="{'blue': category === ''}" (click)="filter('')">All Products</button>
         </li>
     <li>
-        <button class="bg-color" (click)="filter('electronics')">Electronics</button>
+        <button class="bg-color" [ngClass]="{'blue': category === 'electronics'}" (click)="filter('electronics')">Electronics</button>
 
     </li>
     <li>
-        <button class="bg-color"  (click)="filter('mens clothing')">Mens's Clothing</button>
+        <button class="bg-color" [ngClass]="{'blue': category === 'mens clothing'}"  (click)="filter('mens clothing')">Mens's Clothing</button>
 
     </li>
     <li>
-        <button class="bg-color" (click)="filter('womens clothing')">Womens's Clothing</button>
+        <button class="bg-color" [ngClass]="{'blue': category === 'womens clothing'}" (click)="filter('womens clothing')">Womens's Clothing</button>
 
     </li>
     <li>
-        <button class="bg-color" (click)="filter('books')">Books</button>
+        <button class="bg-color" [ngClass]="{'blue': category === 'books'}" (click)="filter('books')">Books</button>
 
     </li>
     <li>
-        <button class="bg-color" (click)="filter('accessories')">Accessories</button>
+        <button class="bg-color"  [ngClass]="{'blue': category === 'accessories'}"(click)="filter('accessories')">Accessories</button>
     
     </li>
        
-    </ul>
+    </ul> -->
+
+    <label for="filter"> <span class="material-icons login-icon">
+        filter_alt
+        </span>:</label>
+        <select id="filter"(change)="filter($event)" class="filter-dropdown ">
+            <option value="">All Products</option>
+            <option value="electronics">Electronics</option>
+            <option value="mens clothing">Mens's Clothing</option>
+            <option value="womens clothing">Womens's Clothing</option>
+            <option value="books">Books</option>
+            <option value="accessories">Accessories</option>
+        </select>
+
+        <!-- <mat-form-field>
+            <mat-label for="filter"> <span class="material-icons login-icon">
+                filter_alt
+                </span>Filters:</mat-label>
+  <mat-select (change)="filter($event)"  multiple>
+    
+    <mat-option value="">All Products</mat-option>
+    <mat-option value="electronics">Electronics</mat-option>
+    <mat-option value="mens clothing">Mens's Clothing</mat-option>
+    <mat-option value="womens clothing">Womens's Clothing</mat-option>
+    <mat-option value="books">Books</mat-option>
+    <mat-option value="accessories">Accessories</mat-option>
+
+  </mat-select>
+</mat-form-field>
+     -->
+</div>
+
+<div class="col-3 pt-4">
+    <label for="filter"> <span class="material-icons login-icon">
+        sort
+        </span>Sort By:</label>
+        <select id="filter"(change)="sort($event)" class="filter-dropdown ">
+            <option value="">Featured</option>
+            <option value="pricelh">Price: Low to High</option>
+            <option value="pricehl">Price: High to Low</option>
+            <option value="rating">Rating</option>
+        </select>
 </div>
 </header>
 
 <div class="ctn wears">
     <div class="rw">
-        <ng-container *ngFor="let item of filterCategory | filter:searchKey:'title' " class="r">
+        <ng-container *ngIf="(filterCategory|filter:searchKey:'title').length != 0; else noItems">
+        <ng-container *ngFor="let item of filterCategory | filter:searchKey:'title', let i = index" class="r">
             <div class="card bg-light">
-                <img src="{{item.image}}" alt="">
-                <h5><a (click)="addTopd(item)">{{item.title}}</a></h5>
-                <p>{{item.description}}</p>
-                <h6>
+                <a (click)="addTopd(item)"><img class="zoom" src="{{item.image}}" alt=""></a>
+                <h5 class="class4 class5"><a (click)="addTopd(item)">{{item.title}}</a></h5>
+                <!-- <p>{{item.description}}</p> -->
+                <div class="row">
+                    
+                    <div class=" col-6 class2">
+
+                    <star-rating class="mr-0 pr-0" [value]="item.rating.rate" [totalstars]="5" [checkedcolor]="'orange'" uncheckedcolor="black" size="24px" [readonly]="true"></star-rating>
+                        </div>
+                        <div class="col-4 class1">
+                            {{item.rating.rate | number : '1.1-1'}} ({{item.rating.count}})
+                        </div>
+                </div>
+                <h6 class="class6"><Strong>Price:</Strong> {{item.price | currency:'USD':true:'.2-2'}}</h6>
+
+                <!-- <h6>
                     <button (click)="addTopd(item)" class="btn btn-primary bg-color">View details</button>
-                </h6>
-                <h6><Strong>Price:</Strong> ${{item.price}}</h6>
-                <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn" (click)="addToCart(item)">Add To Cart</button>
+                </h6> -->
+                <div class="row">
+                    <div class="col-4">
+                    <label class="class3">Quantity:</label>
+                    <select class="form-select" [(ngModel)]="selectedQuantities[i]">
+                        <option [value]="undefined" selected="selected">1</option>
+                        <option [value]="2">2</option>
+                        <option [value]="3">3</option>
+                        <option [value]="4">4</option>
+                        <option [value]="5">5</option>
+                        <option [value]="6">6</option>
+                        <option [value]="7">7</option>
+
+                    </select>
+                    </div>
+                    <div class=" col-8 ">
+
+
+                    <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn full-cart mt-4" (click)="addToCart(item, i)">Add To Cart</button>
+                </div>
+                
+                </div>
             </div>
         </ng-container>
+    </ng-container>
     </div>
+    <button (click)="scrollToTop()" class="full">Back to Top</button>
 </div>
 
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -56,7 +131,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="staticBackdropLabel">CRN Stores</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" #modal [hidden]="true" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             <p>Added To Cart</p>
@@ -64,3 +139,9 @@
       </div>
     </div>
   </div>
+
+<ng-template #noItems>
+    <div class="container">
+        <h1>No Items Found</h1>
+    </div>
+</ng-template>

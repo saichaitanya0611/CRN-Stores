@@ -14,8 +14,17 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { APP_INITIALIZER } from '@angular/core';
 import { LoginComponent } from './components/login/login.component';
-import { RegistrationComponent } from './components/registration/registration.component';
+import { RegistrationComponent, TrackCapsDirective } from './components/registration/registration.component';
 import { RatingModule, StarRatingComponent } from 'ng-starrating';
+import { HelpComponent } from './components/help/help.component';
+import {MatIconModule} from '@angular/material/icon';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
+// import { NgSelectModule } from "@ng-select/ng-select"; 
+// import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
 
 
 @NgModule({
@@ -27,7 +36,9 @@ import { RatingModule, StarRatingComponent } from 'ng-starrating';
     FilterPipe,
     PDetailsComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    TrackCapsDirective,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +46,13 @@ import { RatingModule, StarRatingComponent } from 'ng-starrating';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RatingModule
+    MatIconModule,
+    RatingModule,
+    NoopAnimationsModule,
+    MatSelectModule,
+    MatFormFieldModule
+    // NgSelectModule
+    // NgMultiSelectDropDownModule
     // ServiceWorkerModule.register('ngsw-worker.js', {
     //   enabled: environment.production,
     //   // Register the ServiceWorker as soon as the app is stable
